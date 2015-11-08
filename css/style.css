@@ -3,7 +3,9 @@ body {
 }
 #rang-nav {
   height: 600px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-break: break-all;
   padding-left: 0;
   padding-right: 0;
 }
@@ -13,9 +15,27 @@ body {
 #rang-main {
   height: 600px;
   overflow: auto;
-  padding-left: 0;
-  padding-right: 0;
+  padding-top: 10px;
 }
 footer {
   display: none;
+}
+.mw-editsection {
+  font-size: 50%;
+}
+#rang-right {
+  float:right;
+  width: 226px;
+  margin-left: 1em;
+}
+#rang-thumb {
+  border: 1px solid #ccc;
+  padding: 3px;
+}
+#rang-iu:empty {
+  display: none;
+}
+#rang-iu::before {
+  content: "Penggunaan berkas";
+  font-size: 2em;
 }
