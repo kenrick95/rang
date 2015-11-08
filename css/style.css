@@ -1,0 +1,21 @@
+body {
+  padding-top: 50px;
+}
+#rang-nav {
+  height: 600px;
+  overflow: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+#rang-nav > ul {
+  width: 100%;
+}
+#rang-main {
+  height: 600px;
+  overflow: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+footer {
+  display: none;
+}
