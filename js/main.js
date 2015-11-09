@@ -135,12 +135,14 @@ $(document).ready(function () {
       $("#rang-reason").on("input", function () {
         rangConfig.reason = $(this).val();
       });
+      if ($("#rang-username").length === 0 ||
+        $("#rang-username").data('can-delete') !== 1) {
+        $("#rang-delete").attr("disabled", "disabled");
+      }
 
       $("#rang-delete").on("click", function () {
         var pageid = $(this).data('pageid'),
           reason = rangConfig.reason;
-          console.log(reason);
-          return;
         $(this).attr("disabled", "disabled");
         $.ajax({
             url: "handler.php",

@@ -17,6 +17,7 @@ include("secret.php");
 $settings['gTokenKey'] = '';
 $settings['gTokenSecret'] = '';
 $settings['loggedinUsername']  = '';
+$settings['userCanDelete'] = '';
 
 session_start();
 if ( isset( $_SESSION['tokenKey'] ) ) {
@@ -24,6 +25,7 @@ if ( isset( $_SESSION['tokenKey'] ) ) {
     $settings['gTokenSecret'] = $_SESSION['tokenSecret'];
     if ( isset( $_SESSION['loggedinUsername'] ) ) {
         $settings['loggedinUsername'] = $_SESSION['loggedinUsername'];
+        $settings['userCanDelete'] = $_SESSION['userCanDelete'];
     }
 
 }

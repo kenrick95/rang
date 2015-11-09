@@ -40,7 +40,7 @@ require_once("api/config.php");
                 <li><?php if (empty($settings['loggedinUsername'])) {
                   ?><a href="auth.php">Auth</a><?php
                 } else {
-                  ?><a><?= $settings['loggedinUsername'] ?></a><?php
+                  ?><a id="rang-username" data-can-delete="<?= $settings['userCanDelete'] ?>"><?= $settings['loggedinUsername'] ?></a><?php
                 }?></li>
               </ul>
             </div><!-- /.navbar-collapse -->

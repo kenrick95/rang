@@ -187,6 +187,7 @@ function fetch_current_username() {
         'format' => 'json',
         'action' => 'query',
         'meta' => 'userinfo',
+        'uiprop' => 'rights'
     ), $ch );
 
     if ( isset( $res->error->code ) && $res->error->code === 'mwoauth-invalid-authorization' ) {
@@ -209,7 +210,10 @@ function fetch_current_username() {
     $current_username = str_replace(" ", "_", trim($res->query->userinfo->name));
     session_start();
     $_SESSION['loggedinUsername'] = $settings['loggedinUsername'] = $current_username;
+    $_SESSION['userCanDelete'] = $settings['userCanDelete'] = in_array("delete", $res->query->userinfo->rights);
     session_write_close();
+    var_dump(in_array("delete", $res->query->userinfo->rights));
+
     return $current_username;
 }
 
