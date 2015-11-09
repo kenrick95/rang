@@ -39,3 +39,8 @@ footer {
   content: "Penggunaan berkas";
   font-size: 2em;
 }
+#rang-reason {
+  width: auto;
+  display: inline-block;
+  vertical-align: bottom;
+}

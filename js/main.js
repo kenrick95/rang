@@ -1,7 +1,11 @@
 $(document).ready(function () {
+  var rangConfig = {
+    url: "//id.wikipedia.org",
+    reason: "[[WP:KPC#B5]]"
+  };
   var rangData = null;
   $.ajax({
-      url: "https://id.wikipedia.org/w/api.php",
+      url: rangConfig.url + "/w/api.php",
       dataType: "jsonp",
       data: {
         action: "query",
@@ -24,6 +28,7 @@ $(document).ready(function () {
         $(coll).append($("<li/>", {
           html: $("<a/>", {
             class: "rang-item",
+            id: "rang-item-" + x,
             href: "#",
             "data-pageid": x,
             text: rangData[x].title
@@ -49,10 +54,24 @@ $(document).ready(function () {
         })))
         .append($("<h1/>", {
           html: $("<a/>", {
-            href: "//id.wikipedia.org/wiki/" + data.title,
+            href: rangConfig.url + "/wiki/" + data.title,
             text: data.title,
             target: "_blank"
           })
+        }))
+        .append("<br>")
+          .append($("<input/>", {
+            id: "rang-reason",
+            type: "text",
+            class: "form-control",
+            placeholder: "Alasan penghapusan",
+            value: rangConfig.reason
+          }))
+          .append($("<button/>", {
+          class: "btn btn-danger",
+          text: "Hapus",
+          id: "rang-delete",
+          "data-pageid": pageid
         }))
         .append($("<div/>", {
           id: "rang-content",
@@ -60,18 +79,17 @@ $(document).ready(function () {
         }));
       $("#rang-status-img-timestamp").text(data.imageinfo[0].timestamp);
       $("#rang-status-img-user").html($("<a/>", {
-        href: "//id.wikipedia.org/wiki/User:" + data.imageinfo[0].user,
+        href: rangConfig.url + "/wiki/User:" + data.imageinfo[0].user,
         text: data.imageinfo[0].user
       }));
       $("#rang-status-rev-timestamp").text(data.revisions[0].timestamp);
       $("#rang-status-rev-user").html($("<a/>", {
-        href: "//id.wikipedia.org/wiki/User:" + data.revisions[0].user,
+        href: rangConfig.url + "/wiki/User:" + data.revisions[0].user,
         text: data.revisions[0].user
       }));
-      // "http://rest.wikimedia.org/id.wikipedia.org/v1/page/html/" + data.title
 
       $.ajax({
-          url: "https://id.wikipedia.org/w/api.php",
+          url: rangConfig.url + "/w/api.php",
           dataType: "jsonp",
           data: {
             action: "query",
@@ -95,7 +113,7 @@ $(document).ready(function () {
             if (iu.hasOwnProperty(iuKey)) {
               collIu.append($("<li/>", {
                 html: $("<a/>", {
-                  href: "//id.wikipedia.org/wiki/" + iu[iuKey].title,
+                  href: rangConfig.url + "/wiki/" + iu[iuKey].title,
                   text: iu[iuKey].title
                 })
               }));
@@ -107,16 +125,57 @@ $(document).ready(function () {
 
 
         var html = data.query.pages[pageid].revisions[0]['*'];
-        html = html.replace(/href="\/w/g, 'href="//id.wikipedia.org/w');
+        html = html.replace(/href="\/w/g, 'href="' + rangConfig.url + '/w');
         $("#rang-content").html(html);
         $("#rang-thumb").attr("src", data.query.pages[pageid].imageinfo[0].thumburl);
       });
 
       $("#rang-main").html(coll);
+
+      $("#rang-reason").on("input", function () {
+        rangConfig.reason = $(this).val();
+      });
+
+      $("#rang-delete").on("click", function () {
+        var pageid = $(this).data('pageid'),
+          reason = rangConfig.reason;
+          console.log(reason);
+          return;
+        $(this).attr("disabled", "disabled");
+        $.ajax({
+            url: "handler.php",
+            dataType: "json",
+            data: {
+              func: "delete_image",
+              x1: pageid,
+              x2: reason
+            }
+        }).done(function (data) {
+          $("#rang-delete").removeAttr("disabled");
+          if (!!data.delete) {
+            //$("#rang-item-" + pageid).parent().next().children().click();
+            $("#rang-item-" + pageid).parent().remove();
+          } else {
+            alert("Gagal menghapus berkas dengan id " + pageid);
+              $("#rang-item-" + pageid).click();
+          }
+
+        });
+        $("#rang-item-" + pageid).parent().next().children().click();
+      });
     });
   }).done(function () {
     $(".rang-item").first().click();
   });
+  function resizeHandler() {
+    var newHeight = $(window).innerHeight() - 65;
+
+    $("#rang-main").height(newHeight);
+    $("#rang-nav").height(newHeight);
+  }
+  $(window).resize(resizeHandler);
+  resizeHandler();
+
 
 
 });

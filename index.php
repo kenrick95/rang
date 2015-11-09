@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+require_once("api/config.php");
+?><!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,15 +13,15 @@
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header col-xs-2">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#rang-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href=".">Rang</a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" id="rang-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-left" id="rang-status">
                 <li><a>
                   Diunggah oleh
@@ -35,7 +37,11 @@
                 </a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Auth</a></li>
+                <li><?php if (empty($settings['loggedinUsername'])) {
+                  ?><a href="auth.php">Auth</a><?php
+                } else {
+                  ?><a><?= $settings['loggedinUsername'] ?></a><?php
+                }?></li>
               </ul>
             </div><!-- /.navbar-collapse -->
         </div>
