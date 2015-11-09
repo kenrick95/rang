@@ -7,5 +7,7 @@ if (empty($settings['gTokenKey'])) {
   if (empty($settings['loggedinUsername'])){
       $settings['loggedinUsername'] = fetch_current_username();
   }
-  header("Location: /");
+  if (!empty($settings['loggedinUsername'])){ // no error in above function call
+    header("Location: index.php");
+  }
 }

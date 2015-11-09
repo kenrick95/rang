@@ -192,8 +192,9 @@ function fetch_current_username() {
 
     if ( isset( $res->error->code ) && $res->error->code === 'mwoauth-invalid-authorization' ) {
         // We're not authorized!
-        echo 'You haven\'t authorized this application yet!';
-        echo '<hr>';
+        auth_redirect();
+        //echo 'You haven\'t authorized this application yet!';
+        //echo '<hr>';
         return;
     }
 
@@ -288,8 +289,9 @@ function delete_image($pageid, $reason = '') {
 
     if ( isset( $res->error->code ) && $res->error->code === 'mwoauth-invalid-authorization' ) {
         // We're not authorized!
-        echo 'You haven\'t authorized this application yet!';
-        echo '<hr>';
+        auth_redirect();
+        //echo 'You haven\'t authorized this application yet!';
+        //echo '<hr>';
         return;
     }
     if ( !isset( $res->query->tokens ) ) {
