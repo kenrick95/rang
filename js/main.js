@@ -11,7 +11,7 @@ $(document).ready(function () {
         generator: "categorymembers",
         gcmtitle: "Kategori:Artikel yang layak untuk dihapus",
         gcmprop: "title|type|timestamp",
-        gcmnamespace: "0|1|2|3|4|5|6|7|8|9|10|11|12|13|15|100|101|828|829|2300|2301|2302|2303|2600",
+        gcmnamespace: "6",
         gcmlimit: 500,
         gcmsort: "timestamp",
         gcmend: "2015-10-31T00:00:00Z"
