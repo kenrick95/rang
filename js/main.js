@@ -4,6 +4,11 @@ $(document).ready(function () {
     reason: "[[WP:KPC#B5]]"
   };
   var rangData = null;
+  var today = new Date();
+  var lastWeek = new Date(today.getFullYear(), today.getMonth(),
+    today.getDate() - 7, today.getHours(), today.getMinutes(),
+    today.getSeconds(), today.getMilliseconds());
+
   $.ajax({
       url: rangConfig.url + "/w/api.php",
       dataType: "jsonp",
@@ -18,7 +23,7 @@ $(document).ready(function () {
         gcmnamespace: "6",
         gcmlimit: 500,
         gcmsort: "timestamp",
-        gcmend: "2015-10-31T00:00:00Z"
+        gcmend: lastWeek.toISOString()
       }
   }).done(function(data) {
     rangData = data.query.pages;
