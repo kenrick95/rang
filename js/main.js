@@ -26,6 +26,10 @@ $(document).ready(function () {
         gcmend: lastWeek.toISOString()
       }
   }).done(function(data) {
+    if (!data.query) {
+      console.warn('Either no data or error', data)
+      return;
+    }
     rangData = data.query.pages;
     var coll = $("<div/>");
     for (var x in rangData) {

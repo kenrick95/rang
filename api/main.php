@@ -149,7 +149,7 @@ function fetch_access_token() {
     $url .= "&oauth_signature=" . urlencode( $signature );
     $ch = curl_init();
     curl_setopt( $ch, CURLOPT_URL, $url );
-    curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+    // curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
     curl_setopt( $ch, CURLOPT_USERAGENT, $settings['gUserAgent'] );
     curl_setopt( $ch, CURLOPT_HEADER, 0 );
     curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
@@ -181,6 +181,7 @@ function fetch_access_token() {
 }
 
 function fetch_current_username() {
+    global $settings;
     // Fetch the username
     $ch = null;
     $res = api_query( array(
@@ -223,7 +224,7 @@ function fetch_current_username() {
  *
  * @param array $post Post data
  * @param object $ch Curl handle
- * @return array API results
+ * @return object API results
  */
 function api_query( $post, &$ch = null ) {
     global $settings;
