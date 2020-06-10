@@ -42,9 +42,9 @@ require_once("api/config.php");
         <ul class="nav navbar-nav navbar-right">
           <li><?php if (empty($settings['loggedinUsername'])) {
               ?><a href="auth.php">Auth</a><?php
-                                              } else {
-                                                ?><a id="rang-username" data-can-delete="<?= $settings['userCanDelete'] ?>"><?= $settings['loggedinUsername'] ?></a><?php
-                                                                                                                                    } ?></li>
+                                          } else {
+                                            ?><a id="rang-username" data-can-delete="<?= $settings['userCanDelete'] ?>"><?= $settings['loggedinUsername'] ?></a><?php
+                                                                                                                                                              } ?></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
@@ -66,7 +66,7 @@ require_once("api/config.php");
       &copy; <a href="http://kenrick95.org/">Kenrick95</a>.
     </div>
   </footer>
-  <script src="//tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="//tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="//tools-static.wmflabs.org/cdnjs/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
 
