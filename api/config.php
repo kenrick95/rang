@@ -20,16 +20,15 @@ $settings['loggedinUsername']  = '';
 $settings['userCanDelete'] = '';
 
 session_start();
-if ( isset( $_SESSION['tokenKey'] ) ) {
+if (isset($_SESSION['tokenKey'])) {
     $settings['gTokenKey'] = $_SESSION['tokenKey'];
     $settings['gTokenSecret'] = $_SESSION['tokenSecret'];
-    if ( isset( $_SESSION['loggedinUsername'] ) ) {
+    if (isset($_SESSION['loggedinUsername'])) {
         $settings['loggedinUsername'] = $_SESSION['loggedinUsername'];
         $settings['userCanDelete'] = $_SESSION['userCanDelete'];
     }
-
 }
 session_write_close();
-if ( isset( $_GET['oauth_verifier'] ) && $_GET['oauth_verifier'] ) {
+if (isset($_GET['oauth_verifier']) && $_GET['oauth_verifier']) {
     fetch_access_token();
 }

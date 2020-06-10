@@ -24,7 +24,7 @@ footer {
   font-size: 50%;
 }
 #rang-right {
-  float:right;
+  float: right;
   width: 226px;
   margin-left: 1em;
 }
@@ -36,7 +36,7 @@ footer {
   display: none;
 }
 #rang-iu::before {
-  content: "Penggunaan berkas";
+  content: 'Penggunaan berkas';
   font-size: 2em;
 }
 #rang-reason {
